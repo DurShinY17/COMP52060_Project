@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2026-05-31" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="ja_JP">
+    <description/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="名前" width="200" order="0"/>
+        <field id="tpd4" name="開始日" width="75" order="1"/>
+        <field id="tpd5" name="終了日" width="75" order="2"/>
+        <field id="tpd15" name="メモ" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="名前" width="210" order="0"/>
+        <field id="1" name="デフォルトの役割" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="f7bc2729d5b44b6c8920d08d759b3137" name="Disseration" meeting="false" start="2026-03-23" duration="119" complete="0" expand="true">
+            <task id="12" uid="5bbad015f9b3454fb3022899ae5f7292" name="Milestone: 2" color="#000000" meeting="true" start="2026-05-01" duration="0" complete="0" expand="true"/>
+            <task id="2" uid="491ddfc270254cecb7c44cd25459833f" name="Milestone: 3" meeting="true" start="2026-09-04" duration="0" complete="0" expand="true"/>
+            <task id="1" uid="a550bd8820904f5cbeca17ec074a5697" name="2. Literature review and Project plan" meeting="false" start="2026-03-23" duration="29" complete="0" expand="true">
+                <task id="3" uid="627d885f9c604f4f8a963404d91deec7" name="Back ground investigation" meeting="false" start="2026-03-23" duration="10" complete="0" expand="true"/>
+                <task id="7" uid="d5814437e0724c129125156590dc158a" name="Research question definition" color="#8cb6ce" meeting="false" start="2026-03-23" duration="10" complete="0" expand="true"/>
+                <task id="6" uid="f1d1060abd174acf9ec3962f4e63d50c" name="Evaluation metrics definition" color="#8cb6ce" meeting="false" start="2026-03-23" duration="10" complete="0" expand="true">
+                    <notes><![CDATA[・drawbar pull
+・wheel sinkage
+・driving torque
+]]></notes>
+                </task>
+                <task id="5" uid="ac7a9a9bcdc94d9184464f80ae3460a0" name="Initial test plan" color="#8cb6ce" meeting="false" start="2026-03-23" duration="10" complete="0" expand="true"/>
+                <task id="4" uid="e3793aff9b6e4453b37f56ad16004102" name="Buffer" color="#8cb6ce" meeting="false" start="2026-04-06" duration="4" complete="0" expand="true"/>
+                <task id="8" uid="3c1f2ec0aa4e4546b91268b99f9a5d21" name="Terramechanics study" meeting="false" start="2026-04-10" duration="10" complete="0" expand="true">
+                    <notes><![CDATA[・Bekker model
+・pressure-sinkage
+・shear stress]]></notes>
+                </task>
+                <task id="10" uid="191b20787ea1428dbac00b13763e116c" name="Meta-heuristics study" color="#8cb6ce" meeting="false" start="2026-04-10" duration="10" complete="0" expand="true">
+                    <notes><![CDATA[・genetic algorithm
+・evolutionary optimisation]]></notes>
+                </task>
+                <task id="9" uid="ec9adf06949e4320bbc5bfbfe4aafbab" name="Simulator study" color="#8cb6ce" meeting="false" start="2026-04-17" duration="5" complete="0" expand="true"/>
+                <task id="14" uid="78c2539c22c34b5994fc20ba27a6ab80" name="Simulation environment setup" meeting="false" start="2026-04-17" duration="5" complete="0" expand="true"/>
+                <task id="11" uid="67c2055e475b4c67b0c0447df3870296" name="Writing Literature review" meeting="false" start="2026-03-23" duration="29" complete="0" expand="true"/>
+            </task>
+            <task id="13" uid="38b6bb64d264470d96dec1e4a8fd35bb" name="3. Project report" meeting="false" start="2026-05-01" duration="90" complete="0" expand="true">
+                <task id="15" uid="6fe48fa281b643d3b45b100a947ea800" name="Modeling" meeting="false" start="2026-05-01" duration="16" complete="0" expand="true">
+                    <notes><![CDATA[・Terrain
+・Wheel
+     Left and right
+     Go straigh model
+・Rover
+     Rover <- wheels(4 or 6) + box (Simple model)]]></notes>
+                </task>
+                <task id="16" uid="96e282758839406ebfa1957f9464c33f" name="Wheel Design" meeting="false" start="2026-05-15" duration="16" complete="0" expand="true">
+                    <notes><![CDATA[・radius
+・width
+・grouser height
+・grouser spacing
+・Polygon wheels
+・star wheels
+・spike wheels]]></notes>
+                </task>
+                <task id="17" uid="438fa25a025c4afe85187fcf9f1b5e3f" name="Optimisation Algorithm Development" meeting="false" start="2026-05-29" duration="16" complete="0" expand="true"/>
+                <task id="18" uid="cb98e6f83a0e4313a3df4adf4101d951" name="Simulation Experiments" meeting="false" start="2026-06-12" duration="36" complete="0" expand="true">
+                    <notes><![CDATA[・3/19
+    One month is not enough.
+    I will keep 1.5 month.]]></notes>
+                </task>
+                <task id="19" uid="ad497eaf7d534ce28bdc11e7310282d2" name="(Robot development)" meeting="false" start="2026-07-20" duration="15" complete="0" expand="true"/>
+                <task id="20" uid="bca49200c0f54378b518fb13a8f8739c" name="(Analysis)" meeting="false" start="2026-08-10" duration="15" complete="0" expand="true"/>
+                <task id="21" uid="bcc35fdbdf64414b97a7f6f0498f45e8" name="Writing" meeting="false" start="2026-07-20" duration="34" complete="0" expand="true"/>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Shin" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

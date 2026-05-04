@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2026-03-01" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="ja_JP">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="名前" width="200" order="0"/>
+        <field id="tpd4" name="開始日" width="75" order="1"/>
+        <field id="tpd5" name="終了日" width="75" order="2"/>
+        <field id="tpd15" name="メモ" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="名前" width="210" order="0"/>
+        <field id="1" name="デフォルトの役割" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="3" uid="20d4a134914f4dc387232e63ead2370c" name="Requirements Definition" meeting="false" start="2026-03-23" duration="10" complete="0" expand="true">
+            <depend id="0" type="2" difference="0" hardness="Strong"/>
+            <task id="1" uid="f7bdcfc6aaab49018d3ee03105150f8e" name="Back ground investigation" meeting="false" start="2026-03-23" duration="10" complete="0" expand="true"/>
+            <task id="2" uid="5f5196f29f5744bc9aba7447bc1af1d1" name="Evaluation metrics definition" meeting="false" start="2026-03-30" duration="5" complete="0" expand="true">
+                <notes><![CDATA[・drawbar pull
+・wheel sinkage
+・driving torque
+]]></notes>
+            </task>
+        </task>
+        <task id="0" uid="9c6ecfca2e4d4658815208fe5f016e82" name="Research question definition" meeting="true" start="2026-04-06" duration="0" complete="0" expand="true">
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="4" uid="1c581df54d2a402298e9ffb3954fb0ed" name="System Design" meeting="false" start="2026-04-10" duration="10" complete="0" expand="true">
+            <task id="7" uid="dca37a4494224a60a79e1c7649867435" name="Simulation framework design" meeting="false" start="2026-04-10" duration="5" complete="0" expand="true">
+                <depend id="8" type="2" difference="0" hardness="Strong"/>
+                <task id="5" uid="377e8fd849764776b534393d3344e476" name="Terramechanics selection" meeting="false" start="2026-04-10" duration="5" complete="0" expand="true">
+                    <notes><![CDATA[・Becker model
+・pressure-sinkage
+・shear stress]]></notes>
+                </task>
+                <task id="6" uid="4ee9d0a8d7d7471fb52dc7d500b1cc13" name="Optimisation strategy design" meeting="false" start="2026-04-10" duration="5" complete="0" expand="true">
+                    <notes><![CDATA[・genetic algorithm
+・evolutionary optimisation
+]]></notes>
+                </task>
+            </task>
+            <task id="8" uid="e320485ca78844228f20cf630a0ddc70" name="Simulator selection" meeting="true" start="2026-04-17" duration="0" complete="0" expand="true">
+                <depend id="9" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="9" uid="4383c59680cb40c1870f920c227973c2" name="Simulation envilonment setup" meeting="false" start="2026-04-17" duration="5" complete="0" expand="true">
+                <depend id="10" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="10" uid="b71c5f12c3334198b3a34022ee827432" name="Simulation Ready" meeting="true" start="2026-04-24" duration="0" complete="0" expand="true">
+            <depend id="11" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="11" uid="fa1fdd3f16d1470bafe160f7c70917ae" name="Detailed Design" meeting="false" start="2026-05-01" duration="10" complete="0" expand="true">
+            <depend id="15" type="2" difference="0" hardness="Strong"/>
+            <task id="14" uid="be6042db73d147d58844f303cb29874b" name="Wheel parameters" meeting="false" start="2026-05-01" duration="10" complete="0" expand="true"/>
+            <task id="12" uid="a6f5dce703cc46a9965c108f10d1ce13" name="Terrain condition" meeting="false" start="2026-05-01" duration="10" complete="0" expand="true"/>
+        </task>
+        <task id="15" uid="adb68b105d894a01a1f6b5d91c9f2a03" name="Initial test plan" meeting="true" start="2026-05-15" duration="0" complete="0" expand="true">
+            <depend id="16" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="16" uid="7329e2882a434fd9b92b38832ead25fe" name="Implementation" meeting="false" start="2026-05-15" duration="26" complete="0" expand="true">
+            <task id="17" uid="67fe46f3ec6b4779b12951ec5d7369b0" name="Wheel design" meeting="false" start="2026-05-15" duration="16" complete="0" expand="true"/>
+            <task id="18" uid="1a8883675ccf4f84a727010970e82f47" name="Optimisation algorith development" meeting="false" start="2026-05-29" duration="16" complete="0" expand="true">
+                <depend id="19" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="19" uid="53dc63ce44574514979b0367395ec803" name="Model ready" meeting="true" start="2026-06-22" duration="0" complete="0" expand="true">
+            <depend id="20" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="20" uid="c57c8da7f9e94bc480d96b91a7a6019f" name="Simulation Experiments" meeting="false" start="2026-06-22" duration="31" complete="0" expand="true">
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="21" uid="c72ffcc40faf4255a48973ba845a7530" name="Writing" meeting="false" start="2026-07-20" duration="34" complete="0" expand="true">
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="22" uid="a5a35431f2f44cb28c7333aaaecf7e30" name="Deliverable" meeting="true" start="2026-09-04" duration="0" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
