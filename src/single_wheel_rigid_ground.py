@@ -39,6 +39,12 @@ vis.SetWindowSize(1280, 720)
 vis.SetWindowTitle("Rigid ground wheel drop")
 vis.Initialize()   # ← これだけでカメラもライトも自動生成される
 
+# ★ カメラを手動で追加（これが重要）
+vis.AddCamera(
+    chrono.ChVector3d(2, 1, 2),   # カメラ位置
+    chrono.ChVector3d(0, 0, 0)    # 注視点
+)
+
 step = 1e-3
 while vis.Run():
     vis.BeginScene()
