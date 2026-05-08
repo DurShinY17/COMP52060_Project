@@ -21,12 +21,13 @@ ground_vis = chrono.ChVisualShapeBox(chrono.ChVector3d(10.0, 0.2, 10.0))
 # Material（色）
 ground_mat = chrono.ChVisualMaterial()
 ground_mat.SetDiffuseColor(chrono.ChColor(0.2, 0.6, 0.2))  # 緑
+ground_mat.SetEmissiveColor(chrono.ChColor(0.2, 0.6, 0.2))   # ★自己発光
+ground_mat.SetAmbientColor(chrono.ChColor(0.2, 0.6, 0.2))    # ★環境光
+ground_mat.SetSpecularColor(chrono.ChColor(0.4, 0.4, 0.4))   # ★光沢
 
 # ★ ここがあなたの環境で正しい色設定方法
 ground_vis.GetMaterials().push_back(ground_mat)
-
 ground.AddVisualShape(ground_vis)
-
 system.Add(ground)
 
 # 車輪
@@ -50,12 +51,13 @@ wheel_vis = chrono.ChVisualShapeCylinder(0.3, 0.2)
 # Material（色）
 wheel_mat = chrono.ChVisualMaterial()
 wheel_mat.SetDiffuseColor(chrono.ChColor(0.8, 0.2, 0.2))  # 赤
+wheel_mat.SetEmissiveColor(chrono.ChColor(0.8, 0.2, 0.2))   # ★自己発光
+wheel_mat.SetAmbientColor(chrono.ChColor(0.8, 0.2, 0.2))    # ★環境光
+wheel_mat.SetSpecularColor(chrono.ChColor(0.4, 0.4, 0.4))   # ★光沢
 
 # ★ ここも push_back
 wheel_vis.GetMaterials().push_back(wheel_mat)
-
 wheel.AddVisualShape(wheel_vis)
-
 system.Add(wheel)
 
 # 可視化（最小構成）
