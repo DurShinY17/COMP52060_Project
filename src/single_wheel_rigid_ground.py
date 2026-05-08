@@ -5,6 +5,8 @@ import pychrono.irrlicht as chronoirr
 system = chrono.ChSystemSMC()
 system.SetGravitationalAcceleration(chrono.ChVector3d(0, -9.81, 0))
 
+system.SetCollisionSystem(chrono.ChCollisionSystemBullet())
+
 # 地面
 ground = chrono.ChBodyEasyBox(
     10.0, 0.2, 10.0,
