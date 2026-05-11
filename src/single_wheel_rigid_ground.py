@@ -65,8 +65,8 @@ system.Add(wheel)
 # 可視化（最小構成）
 vis = chronoirr.ChVisualSystemIrrlicht()
 vis.AttachSystem(system)
-vis.SetWindowSize(1280, 720)
-vis.SetWindowTitle("Rigid ground wheel drop")
+# vis.SetWindowSize(1280, 720)
+# vis.SetWindowTitle("Rigid ground wheel drop")
 vis.Initialize()   # ← これだけでカメラもライトも自動生成される
 
 # ★ カメラを手動で追加（これが重要）
