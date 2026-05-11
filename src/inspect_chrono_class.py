@@ -47,3 +47,24 @@ with open("chrono_class_list_full.csv", "w", newline="") as f:
         writer.writerow([cls, mod])
 
 print("chrono_class_list_full.csv を出力しました。")
+
+
+import pychrono as chrono
+import inspect
+import csv
+
+classes = [obj for name, obj in chrono.__dict__.items() if inspect.isclass(obj)]
+
+with open("chrono_methods.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Class", "Method"])
+
+    for cls in classes:
+        try:
+            methods = [m for m in dir(cls) if not m.startswith("_")]
+            for m in methods:
+                writer.writerow([cls.__name__, m])
+        except:
+            pass
+
+print("chrono_methods.csv を出力しました。")
