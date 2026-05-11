@@ -1,6 +1,7 @@
 _workspace/
 docs/papers/_obsoleted/
 docs/thesis/_obsoleted/
+docs/api/
 tools/_downloads/
 tools/_tmp/
 .vscode/
