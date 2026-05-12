@@ -65,8 +65,8 @@ system.Add(wheel)
 # 可視化（最小構成）
 vis = chronoirr.ChVisualSystemIrrlicht()
 vis.AttachSystem(system)
-vis.SetWindowSize(1280, 720)
-vis.SetWindowTitle("Rigid ground wheel drop")
+# vis.SetWindowSize(1280, 720)
+# vis.SetWindowTitle("Rigid ground wheel drop")
 vis.Initialize()   # ← これだけでカメラもライトも自動生成される
 
 # ★ カメラを手動で追加（これが重要）
@@ -76,8 +76,25 @@ vis.AddCamera(
 )
 
 step = 1e-3
+time = 0.0
+
 while vis.Run():
     vis.BeginScene()
     vis.Render()
     vis.EndScene()
     system.DoStepDynamics(step)
+
+    # ★ 実験データの取得
+    contact_force = wheel.GetContactForce()
+    pos = wheel.GetPos()
+    # vel = wheel.GetPos_dt()
+    # omega = wheel.GetWvel_loc()
+
+    print(f"t={time:.3f}  "
+          f"N={contact_force.x:.3f}  "
+          f"Fx={contact_force.y:.3f}  "
+          f"Fz={contact_force.z:.3f}  "
+          f"pos={pos}")
+
+    system.DoStepDynamics(step)
+    time += step
