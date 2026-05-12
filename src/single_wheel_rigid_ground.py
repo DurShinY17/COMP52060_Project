@@ -76,8 +76,25 @@ vis.AddCamera(
 )
 
 step = 1e-3
+time = 0.0
+
 while vis.Run():
     vis.BeginScene()
     vis.Render()
     vis.EndScene()
     system.DoStepDynamics(step)
+
+    # ★ 実験データの取得
+    contact_force = wheel.GetContactForce()
+    pos = wheel.GetPos()
+    # vel = wheel.GetPos_dt()
+    # omega = wheel.GetWvel_loc()
+
+    print(f"t={time:.3f}  "
+          f"N={contact_force.x:.3f}  "
+          f"Fx={contact_force.y:.3f}  "
+          f"Fz={contact_force.z:.3f}  "
+          f"pos={pos}")
+
+    system.DoStepDynamics(step)
+    time += step
