@@ -156,7 +156,9 @@ time = 0.0
 # ----------------------------
 # Simulation loop
 # ----------------------------
-while vis.Run():
+END_TIME = 5.0  # seconds
+
+while vis.Run() and time < END_TIME:
     vis.BeginScene()
     vis.Render()
     vis.EndScene()
