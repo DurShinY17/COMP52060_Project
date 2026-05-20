@@ -58,14 +58,38 @@ class LuggedWheel(WheelBase):
         mesh = chrono.ChTriangleMeshConnected()
         for i in range(self.lug_count):
             angle = 2 * math.pi * i / self.lug_count
-            x = self.radius * math.cos(angle)
-            y = self.radius * math.sin(angle)
-            z = 0  # ホイールの中心面に配置
-            # ここは本当は「円周の法線方向に沿った箱」を作るべきだけど、
-            # まずは簡単な板でOK
-            v1 = chrono.ChVector3d(x, y, z)
-            v2 = chrono.ChVector3d(x, y, z + self.lug_height)
-            v3 = chrono.ChVector3d(x, y + self.lug_width, z)
+
+            # 円周上の位置（XY平面）
+            cx = self.radius * math.cos(angle)
+            cy = self.radius * math.sin(angle)
+            cz = 0
+
+            # 放射方向の単位ベクトル
+            nx = math.cos(angle)
+            ny = math.sin(angle)
+            nz = 0
+
+            # ラグの根元（円周上）
+            v1 = chrono.ChVector3d(cx, cy, cz)
+
+            # ラグを外側に伸ばす（放射方向）
+            v2 = chrono.ChVector3d(
+                cx + nx * self.lug_height,
+                cy + ny * self.lug_height,
+                cz
+            )
+
+            # ラグの幅方向（接線方向）
+            tx = -math.sin(angle)
+            ty =  math.cos(angle)
+            tz = 0
+
+            v3 = chrono.ChVector3d(
+                cx + tx * self.lug_width,
+                cy + ty * self.lug_width,
+                cz
+            )
+
             mesh.AddTriangle(v1, v2, v3)
 
         # 3) ラグメッシュを同じボディに載せる
