@@ -39,38 +39,41 @@ class LuggedWheel(WheelBase):
         self.lug_count = lug_count
 
     def create_body(self, system, material):
-        mesh = chrono.ChTriangleMeshConnected()
-
-        # --- 円柱のベースメッシュを生成（簡易版） ---
-        # 本格的には円柱メッシュを生成するが、まずはラグだけでもOK
-
-        # --- ラグを円周に配置 ---
-        for i in range(self.lug_count):
-            angle = 2 * math.pi * i / self.lug_count
-            x = self.radius * math.cos(angle)
-            z = self.radius * math.sin(angle)
-
-            # ラグの四角形を三角形2枚で作る
-            # （ここは後で本格的にする）
-            v1 = chrono.ChVector3d(x, 0, z)
-            v2 = chrono.ChVector3d(x, self.lug_height, z)
-            v3 = chrono.ChVector3d(x + self.lug_width, 0, z)
-
-            mesh.AddTriangle(v1, v2, v3)
-
-        # --- ボディ作成 ---
-        wheel = chrono.ChBody()
+        # 1) まず円柱ボディを作る
+        wheel = chrono.ChBodyEasyCylinder(
+            chrono.ChAxis_Z,
+            self.radius,
+            self.width,
+            1000,
+            True,
+            True,
+            material
+        )
         wheel.SetMass(self.mass)
         wheel.SetInertiaXX(chrono.ChVector3d(1,1,1))
         wheel.SetPos(chrono.ChVector3d(0, self.radius + 0.5, 0))
+        wheel.SetRot(chrono.QuatFromAngleZ(math.pi/2))
 
-        # 可視化
+        # 2) ラグ用メッシュを作る
+        mesh = chrono.ChTriangleMeshConnected()
+        for i in range(self.lug_count):
+            angle = 2 * math.pi * i / self.lug_count
+            x = self.radius * math.cos(angle)
+            y = self.radius * math.sin(angle)
+            z = 0  # ホイールの中心面に配置
+            # ここは本当は「円周の法線方向に沿った箱」を作るべきだけど、
+            # まずは簡単な板でOK
+            v1 = chrono.ChVector3d(x, y, z)
+            v2 = chrono.ChVector3d(x, y, z + self.lug_height)
+            v3 = chrono.ChVector3d(x, y + self.lug_width, z)
+            mesh.AddTriangle(v1, v2, v3)
+
+        # 3) ラグメッシュを同じボディに載せる
         vis = chrono.ChVisualShapeTriangleMesh()
         vis.SetMesh(mesh)
         vis.SetColor(chrono.ChColor(0.3, 0.3, 0.3))
         wheel.AddVisualShape(vis)
 
-        # 衝突形状
         col = chrono.ChCollisionShapeTriangleMesh(material, mesh, False, False, 0.01)
         wheel.AddCollisionShape(col)
 
