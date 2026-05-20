@@ -3,6 +3,13 @@ import pychrono.irrlicht as chronoirr
 import pychrono.vehicle as veh
 import math
 
+# ============================================================
+# Step2: ホイールモデル選択
+#   "cylinder" → 円柱ホイール（今までのやつ）
+#   "mesh"     → メッシュホイール（tractor_wheel.obj）
+# ============================================================
+WHEEL_TYPE = "mesh"   # 必要に応じて "mesh" に変更
+
 # ----------------------------
 # 円柱ホイールのパラメータ
 # ----------------------------
@@ -49,24 +56,58 @@ terrain.Initialize(2.0, 2.0, 0.02)
 terrain.SetPlotType(veh.SCMTerrain.PLOT_SINKAGE, 0, 0.1)
 
 # ----------------------------
-# 円柱ホイール（落下物体）
+# ホイール生成（Step2）
 # ----------------------------
 material = chrono.ChContactMaterialSMC()
 
-wheel = chrono.ChBodyEasyCylinder(
-    chrono.ChAxis_Z,   # 円柱の軸方向
-    radius,            # 半径
-    width,             # 高さ（幅）
-    1000,              # 密度
-    True,              # collide
-    True,              # visual_asset
-    material           # 衝突マテリアル
-)
+if WHEEL_TYPE == "cylinder":
+    # 円柱ホイール
+    wheel = chrono.ChBodyEasyCylinder(
+        chrono.ChAxis_Z,   # 円柱の軸方向
+        radius,            # 半径
+        width,             # 高さ（幅）
+        1000,              # 密度
+        True,              # collide
+        True,              # visual_asset
+        material           # 衝突マテリアル
+    )
+    wheel.SetMass(mass)
+    # 慣性はとりあえず仮（後で理論値にしてもいい）
+    wheel.SetInertiaXX(chrono.ChVector3d(1, 1, 1))
+    wheel.SetPos(chrono.ChVector3d(0, radius + 0.5, 0))
+    wheel.SetRot(chrono.QuatFromAngleZ(math.pi/2))
 
-wheel.SetMass(mass)
-wheel.SetPos(chrono.ChVector3d(0, radius + 0.5, 0))  # 少し上から落とす
-wheel.SetRot(chrono.QuatFromAngleZ(math.pi/2))       # 円柱の軸を横向きに
+elif WHEEL_TYPE == "mesh":
+    # メッシュホイール（tractor_wheel.obj）
+    mesh = chrono.ChTriangleMeshConnected()
+    mesh.LoadWavefrontMesh(chrono.GetChronoDataFile('models/tractor_wheel/tractor_wheel.obj'))
+
+    wheel = chrono.ChBody()
+    wheel.SetMass(20)
+    wheel.SetInertiaXX(chrono.ChVector3d(1, 1, 1))
+    wheel.SetPos(chrono.ChVector3d(0, 0.8, 0))  # 少し上から落とす
+
+    # 可視化
+    vis_shape = chrono.ChVisualShapeTriangleMesh()
+    vis_shape.SetMesh(mesh)
+    vis_shape.SetColor(chrono.ChColor(0.3, 0.3, 0.3))
+    wheel.AddVisualShape(vis_shape)
+
+    # 衝突形状
+    body_ct_shape = chrono.ChCollisionShapeTriangleMesh(
+        material,  # contact material
+        mesh,      # mesh
+        False,     # static?
+        False,     # convex?
+        0.01       # thickness
+    )
+    wheel.AddCollisionShape(body_ct_shape)
+
+else:
+    raise RuntimeError("Unknown WHEEL_TYPE: " + WHEEL_TYPE)
+
 wheel.SetFixed(False)
+wheel.EnableCollision(True)
 sys.Add(wheel)
 
 # ----------------------------
@@ -75,7 +116,7 @@ sys.Add(wheel)
 vis = chronoirr.ChVisualSystemIrrlicht()
 vis.AttachSystem(sys)
 vis.SetWindowSize(1280, 720)
-vis.SetWindowTitle("SCM Terrain - Cylinder Sinkage Test")
+vis.SetWindowTitle("SCM Terrain - Step2 Wheel Model Test")
 vis.Initialize()
 vis.AddSkyBox()
 vis.AddCamera(chrono.ChVector3d(1.5, 1.0, 1.5), chrono.ChVector3d(0, 0, 0))
@@ -91,6 +132,6 @@ while vis.Run():
     vis.Render()
     vis.EndScene()
 
-    print("Wheel Position: ", wheel.GetPos().y)  # Y座標を出力して沈下量を確認
+    print("Wheel Position Y: ", wheel.GetPos().y)
 
     sys.DoStepDynamics(step)
