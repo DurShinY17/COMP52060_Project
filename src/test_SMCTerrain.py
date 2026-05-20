@@ -3,6 +3,8 @@ import pychrono.irrlicht as chronoirr
 import pychrono.vehicle as veh
 import math
 
+from wheel_model import LuggedWheel, LuggedWheelBox
+
 # ============================================================
 # Step2: ホイールモデル選択
 #   "cylinder" → 円柱ホイール（今までのやつ）
@@ -60,6 +62,7 @@ terrain.SetPlotType(veh.SCMTerrain.PLOT_SINKAGE, 0, 0.1)
 # ----------------------------
 material = chrono.ChContactMaterialSMC()
 
+"""
 if WHEEL_TYPE == "cylinder":
     # 円柱ホイール
     wheel = chrono.ChBodyEasyCylinder(
@@ -105,10 +108,23 @@ elif WHEEL_TYPE == "mesh":
 
 else:
     raise RuntimeError("Unknown WHEEL_TYPE: " + WHEEL_TYPE)
+"""
 
-wheel.SetFixed(False)
-wheel.EnableCollision(True)
-sys.Add(wheel)
+# ----------------------------
+# ホイール生成（クラス呼び出し）
+# ----------------------------
+wheel = LuggedWheelBox(
+    radius=0.3,
+    width=0.2,
+    mass=20,
+    lug_height=0.05,
+    lug_width=0.02,
+    lug_count=12
+).create_body(sys, material)
+
+# wheel.SetFixed(False)
+# wheel.EnableCollision(True)
+# sys.Add(wheel)
 
 # ----------------------------
 # 可視化
