@@ -3,6 +3,7 @@ docs/papers/_obsoleted/
 docs/thesis/_obsoleted/
 docs/api/
 experiments/
+src/__pycache__/
 src/demo/
 tools/_downloads/
 tools/_tmp/
