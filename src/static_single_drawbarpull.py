@@ -84,7 +84,7 @@ sys.Add(ground)
 tow = chrono.ChBody()
 tow.SetMass(1.0)
 tow.SetInertiaXX(chrono.ChVector3d(1, 1, 1))
-tow.SetPos(chrono.ChVector3d(0, radius + 0.5, 10))
+tow.SetPos(chrono.ChVector3d(0, radius + 0.5, 0))
 tow.SetFixed(False)
 shape = chrono.ChVisualShapeBox(chrono.ChVector3d(0.2, 0.2, 0.2))
 tow.AddVisualShape(shape)
@@ -141,14 +141,29 @@ sys.Add(link_wheel_tow)
 # ----------------------------
 # Prismatic joint + linear motor (tow vs ground)
 # ----------------------------
-# Prismatic along X
-prismatic = chrono.ChLinkLockPrismatic()
-prismatic.Initialize(ground, tow, chrono.ChFramed(tow.GetPos(), chrono.QUNIT))
-sys.Add(prismatic)
+# X軸だけ自由にする Generic プリズマティック
+slide = chrono.ChLinkMateGeneric(
+    False,  # X translation free
+    True,   # Y locked
+    True,   # Z locked
+    True,   # Rx locked
+    True,   # Ry locked
+    True    # Rz locked
+)
+
+# ローカルZ軸を world X に向ける
+point = tow.GetPos()
+dir   = chrono.ChVector3d(1, 0, 0)  # X方向
+
+slide.Initialize(ground, tow, False, point, point, dir, dir)
+sys.Add(slide)
+
 
 # Linear motor to move tow along X
 motor = chrono.ChLinkMotorLinearPosition()
-motor.Initialize(ground, tow, chrono.ChFramed(tow.GetPos(), chrono.QUNIT))
+
+rot = chrono.QuatFromAngleY(chrono.CH_PI_2)
+motor.Initialize(ground, tow, chrono.ChFramed(point, rot))
 
 # Prescribed motion: x(t) = v * t
 motion = chrono.ChFunctionRamp(0.0, TOW_SPEED)
