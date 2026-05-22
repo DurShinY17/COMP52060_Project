@@ -142,12 +142,12 @@ sys.Add(link_wheel_tow)
 # Constrain wheel to tow (no rotation, same pose)
 # ----------------------------
 link_wheel_tow = chrono.ChLinkMateGeneric(
-    True,   # X translation: tow と同じXにする（ここが最重要）
+    True,   # X translation: tow と同じXにする
     False,  # Y translation: 自由（沈み込みOK）
     True,   # Z translation: 横ずれ禁止
-    False,  # Rx: 回転自由
-    False,  # Ry: 回転自由
-    False   # Rz: 回転自由
+    True,   # Rx locked（回転禁止）
+    True,   # Ry locked
+    True    # Rz locked
 )
 
 frame_w = chrono.ChFramed(wheel.GetPos(), wheel.GetRot())
