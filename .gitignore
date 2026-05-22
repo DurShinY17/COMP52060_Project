@@ -1,8 +1,10 @@
 _workspace/
 docs/papers/_obsoleted/
+docs/plan/
 docs/thesis/_obsoleted/
 docs/api/
 experiments/
+src/__pycache__/
 src/demo/
 tools/_downloads/
 tools/_tmp/
