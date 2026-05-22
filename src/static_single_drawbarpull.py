@@ -207,6 +207,7 @@ csv_writer = csv.writer(csv_file)
 
 csv_writer.writerow([
     "time",
+    "tow_speed",
     "wheel_type",
     "radius",
     "width",
@@ -278,6 +279,7 @@ while vis.Run() and time < END_TIME:
 
     csv_writer.writerow([
         time,
+        TOW_SPEED,
         wheel_label,
         radius,
         width,
