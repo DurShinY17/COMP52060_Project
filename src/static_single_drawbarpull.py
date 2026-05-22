@@ -255,16 +255,23 @@ while vis.Run() and time < END_TIME:
     vis.EndScene()
 
     pos = wheel.GetPos()
-    force = wheel.GetContactForce()
+
+    force = chrono.ChVector3d(0, 0, 0)
+    torque = chrono.ChVector3d(0, 0, 0)
+
+    has_contact = terrain.GetContactForceBody(wheel, force, torque)
+
+    if has_contact:
+        drawbar_pull = -force.x
+        normal_force = max(0.0, -force.y)
+        ay = wheel.GetPosDt2().y
+        normal_force = wheel.GetMass() * (9.81 - ay)
+    else:
+        drawbar_pull = 0.0
+        normal_force = 0.0
 
     # Displacement along X
     displacement = pos.x - initial_x
-
-    # Drawbar pull (X direction)
-    drawbar_pull = -force.x   # soil resists motion
-
-    # Normal force (Y direction)
-    normal_force = max(0.0, -force.y)
 
     # Sinkage
     sinkage = max(0.0, initial_y - pos.y)
