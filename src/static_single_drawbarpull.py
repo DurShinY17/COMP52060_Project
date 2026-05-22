@@ -139,6 +139,31 @@ sys.Add(link_wheel_tow)
 """
 
 # ----------------------------
+# Constrain wheel to tow (no rotation, same pose)
+# ----------------------------
+link_wheel_tow = chrono.ChLinkMateGeneric(
+    True,   # X translation: tow と同じXにする（ここが最重要）
+    False,  # Y translation: 自由（沈み込みOK）
+    True,   # Z translation: 横ずれ禁止
+    False,  # Rx: 回転自由
+    False,  # Ry: 回転自由
+    False   # Rz: 回転自由
+)
+
+frame_w = chrono.ChFramed(wheel.GetPos(), wheel.GetRot())
+frame_t = chrono.ChFramed(tow.GetPos(),   tow.GetRot())
+
+link_wheel_tow.Initialize(
+    wheel,
+    tow,
+    False,      # 絶対座標
+    frame_w,
+    frame_t
+)
+
+sys.Add(link_wheel_tow)
+
+# ----------------------------
 # Prismatic joint + linear motor (tow vs ground)
 # ----------------------------
 # X軸だけ自由にする Generic プリズマティック
